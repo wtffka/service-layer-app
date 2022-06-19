@@ -1,5 +1,6 @@
 package exercise;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -33,16 +34,14 @@ public class HttpClient {
     }
 
     private Map<String, String> generateWeather(String city) {
-
+        Map<String, String> weatherMap = new LinkedHashMap<>();
         String[] cloudy = {"cloudy", "clear", "Partly cloudy"};
+        weatherMap.put("name", city);
+        weatherMap.put("temperature", String.valueOf(getRandomNumber(0, 35)));
+        weatherMap.put("cloudy", cloudy[getRandomNumber(0, cloudy.length - 1)]);
+        weatherMap.put("wind", String.valueOf(getRandomNumber(0, 20)));
+        weatherMap.put("humidity", String.valueOf(getRandomNumber(40, 100)));
 
-        return Map.of(
-            "name", city,
-            "temperature", String.valueOf(getRandomNumber(0, 35)),
-            "cloudy", cloudy[getRandomNumber(0, cloudy.length - 1)],
-            "wind", String.valueOf(getRandomNumber(0, 20)),
-            "humidity", String.valueOf(getRandomNumber(40, 100))
-        );
-
+        return weatherMap;
     }
 }
